@@ -43,9 +43,9 @@ class Customer(db.Model):
     services = db.relationship('Service', secondary=service_request_association, backref='customers')
 
     def is_blocked(self):
-        active_services = db.query(ServiceRequest.id).filter(
-            ServiceRequest.customer_id == self.id,
-            ServiceRequest.service_status.in_(['assigned', 'requested', 'closed'])
+        active_services = db.query(Service_request.id).filter(
+            Service_request.customer_id == self.id,
+            Service_request.service_status.in_(['assigned', 'requested', 'closed'])
         ).count()
         if active_services == 0:
             self.user.active = False
@@ -53,9 +53,9 @@ class Customer(db.Model):
         return self.user.blocked
     
     def active_service_requests(self):
-        return db.query(ServiceRequest.id).filter(
-            ServiceRequest.customer_id == self.id,
-            ServiceRequest.service_status.in_(['assigned', 'requested', 'closed'])
+        return db.query(Service_request.id).filter(
+            Service_request.customer_id == self.id,
+            Service_request.service_status.in_(['assigned', 'requested', 'closed'])
         ).all()
     
 
@@ -93,13 +93,13 @@ class Service(db.Model):
         return Service.query.filter_by(deleted=False).all()
     
     def is_active(self):
-        return db.session.query(ServiceRequest.id).filter(
-            ServiceRequest.service_id == self.id,
-            ServiceRequest.service_status.in_(['requested', 'assigned', 'closed'])
+        return db.session.query(Service_request.id).filter(
+            Service_request.service_id == self.id,
+            Service_request.service_status.in_(['requested', 'assigned', 'closed'])
         ).count() > 0
     
 
-class ServiceRequest(db.Model):
+class Service_request(db.Model):
     __tablename__ = 'service_request'
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     service_id = db.Column(db.Integer, db.ForeignKey('service.id'), nullable=False)

@@ -8,7 +8,7 @@ class Adminprofileform(FlaskForm):
     email = StringField('Email:', validators=[Email(), Length(max=100)])
     submit = SubmitField('Save Changes')
 
-class Passwordeditform(FlaskForm):
+class Editpasswordform(FlaskForm):
     old_password = PasswordField('Old Password:', validators=[InputRequired()])
     new_password = PasswordField('New Password:', validators=[InputRequired(), Length(min=8)])
     confirm_password = PasswordField('Confirm New Password:', validators=[InputRequired()])
@@ -31,7 +31,7 @@ class Customerregistrationform(FlaskForm):
     submit = SubmitField('Register')
 
 
-class Professioanlregistrationform(FlaskForm):
+class Professionalregistrationform(FlaskForm):
     username = StringField('Name:', validators=[InputRequired(),Length(max=100)])
     email = StringField('Email:', validators=[InputRequired(), Email()])
     password = PasswordField('Password:', validators=[InputRequired(), Length(min=8)])

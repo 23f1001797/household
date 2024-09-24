@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        background : url("/../static/images/log-reg-bg.jpg") no-repeat center right fixed;
+        background-size: cover;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container login_block">
+    <h3 style="margin-bottom:30px;">Welcome :)</h3>
+    <form method="POST" action="{{ url_for('login') }}">
+        {{  }}
+    </form>
+
+</div>
